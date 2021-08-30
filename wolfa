@@ -1,0 +1,53 @@
+IEnumerator HoldPlayer()
+    {
+        wolfGrowl.Play();
+        wolfRunCollider.enabled = false;
+        wolfIdleCollider.enabled = true;
+      
+        playerScript.playerCapsCol.enabled = false;
+        gm.handsOff = true;
+        playerScript.rb.velocity = new Vector2(0, 0);
+
+        yield return new WaitForSeconds(0.25f);
+        
+        if(shieldScript.shieldActive == false)
+        {
+            playerScript.TakeDamage(15);
+            playerScript.animator.SetTrigger("playerHurt");
+            playerScript.RandomHurtSound();
+
+            if (playerScript.normalExekiasDefeated)
+            {
+                playerScript.TakeDamage(15);
+            }
+        }
+
+        yield return new WaitForSeconds(0.4f);
+
+        if (shieldScript.shieldActive == false)
+        {
+            playerScript.TakeDamage(15);
+            playerScript.animator.SetTrigger("playerHurt");
+            playerScript.RandomHurtSound();
+
+            if (playerScript.normalExekiasDefeated)
+            {
+                playerScript.TakeDamage(15);
+            }
+        }
+        
+
+        yield return new WaitForSeconds(0.1f);
+
+        if(shieldScript.shieldActive == false)
+        {
+            gm.handsOff = false;
+        }
+        
+
+        yield return new WaitForSeconds(1f);
+
+        playerScript.playerCapsCol.enabled = true;
+
+
+    }
